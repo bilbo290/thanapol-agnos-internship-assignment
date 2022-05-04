@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.919534f8.css",
+    "main.js": "/static/js/main.1e4dd43e.js",
+    "static/js/787.bb589f08.chunk.js": "/static/js/787.bb589f08.chunk.js",
+    "static/media/default-abs.png": "/static/media/default-abs.4cb72338a94d0d78383a.png",
+    "static/media/luq-active.png": "/static/media/luq-active.3ea86420abf147ae92d3.png",
+    "static/media/luq-highlight.png": "/static/media/luq-highlight.60efc9909f4e6de958d3.png",
+    "static/media/logo.svg": "/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/index.html",
+    "main.919534f8.css.map": "/static/css/main.919534f8.css.map",
+    "main.1e4dd43e.js.map": "/static/js/main.1e4dd43e.js.map",
+    "787.bb589f08.chunk.js.map": "/static/js/787.bb589f08.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.919534f8.css",
+    "static/js/main.1e4dd43e.js"
+  ]
+}
