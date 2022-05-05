@@ -1,16 +1,18 @@
-import logo from "./logo.svg";
-import "./App.css";
-import { Link } from "react-router-dom";
+import Box from "@mui/material/Box";
+import Home from "./Home";
+import AbsDiagram from "./Abs";
+import FingerDiagram from "./Finger";
+import { Routes, Route, useParams } from "react-router-dom";
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
-    </div>
+    <Box>
+      <Routes>
+        <Route path="" element={<Home />} />
+        <Route path="Abs" element={<AbsDiagram />} />
+        <Route path="Finger" element={<FingerDiagram />} />
+      </Routes>
+    </Box>
   );
 }
 

@@ -1,10 +1,9 @@
-import React, { useState, useMemo, useRef } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import { Group } from "@visx/group";
 import { RectClipPath } from "@visx/clip-path";
 import { voronoi, VoronoiPolygon } from "@visx/voronoi";
 import { localPoint } from "@visx/event";
 import Box from "@mui/material/Box";
-import { absInitialPoints, absValidRegion } from "./absData";
 
 const neighborRadius = 75;
 const defaultMargin = {
@@ -14,9 +13,30 @@ const defaultMargin = {
   bottom: 0,
 };
 
-const Diagram = ({ width, height, margin = defaultMargin }) => {
-  var data = absInitialPoints;
-  var validRegion = absValidRegion;
+const Diagram = ({ name, width, height, margin = defaultMargin }) => {
+  const [points, setPoints] = useState([{}]);
+  const [region, setRegion] = useState([]);
+  let dataPointsFileName = name + "DataPoints.json";
+  let dataRegionFileName = name + "ValidRegion.json";
+  useEffect(() => {
+    fetch(dataPointsFileName)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setPoints(data);
+      });
+    fetch(dataRegionFileName)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setRegion(data);
+      });
+  }, [dataPointsFileName, dataRegionFileName]);
+
+  useEffect(() => {}, [points, region]);
+
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
   const voronoiLayout = useMemo(
@@ -26,8 +46,8 @@ const Diagram = ({ width, height, margin = defaultMargin }) => {
         y: (d) => d.y * innerHeight,
         width: innerWidth,
         height: innerHeight,
-      })(data),
-    [innerWidth, innerHeight]
+      })(points),
+    [innerWidth, innerHeight, points]
   );
   const polygons = voronoiLayout.polygons();
   const svgRef = useRef(null);
@@ -94,43 +114,50 @@ const Diagram = ({ width, height, margin = defaultMargin }) => {
                     : "transparent"
                 }
                 stroke="#000"
-                strokeWidth={0}
+                strokeWidth={0} //change this to 1 to see the voronoi region
                 fillOpacity={hoveredId && neighborIds.has(polygon.data.id) ? 0 : 1}
-              />
-            ))}
-            {data.map(({ x, y, id }) => (
-              <circle
-                key={`circle-${id}`}
-                r={5}
-                cx={x * innerWidth}
-                cy={y * innerHeight}
-                fill={id === hoveredId ? "fuchsia" : "#000"}
-                fillOpacity={0}
               />
             ))}
           </Group>
         </svg>
       </Box>
 
-      {validRegion.includes(hoveredActive) && active && (
+      {region.includes(hoveredActive) && active && (
         <Box>
-          <Box sx={{ position: "absolute", top: "-236px", left: "-200px", zIndex: "0" }}>
-            <img src={`../img/${hoveredActive}-highlight.png`} alt="highlight" width="400px"></img>
+          <Box
+            key="highlight-box"
+            sx={{ position: "absolute", top: "-236px", left: "-200px", zIndex: "0" }}
+          >
+            <img
+              src={`../img/${hoveredActive}-highlight.png`}
+              alt="highlight-pic"
+              width="400px"
+            ></img>
           </Box>
-          <Box sx={{ position: "absolute", top: "-235px", left: "-205px", zIndex: "0" }}>
-            <img src={`../img/${hoveredActive}-active.png`} alt="active" width="400px"></img>
+          <Box
+            key="active-box"
+            sx={{ position: "absolute", top: "-235px", left: "-205px", zIndex: "0" }}
+          >
+            <img src={`../img/${hoveredActive}-active.png`} alt="active-pic" width="400px"></img>
           </Box>
         </Box>
       )}
       {activeAll && (
         <Box>
-          <Box sx={{ position: "absolute", top: "-231px", left: "-200px", zIndex: "0" }}>
-            <img src={`../img/all-over-highlight.png`} alt="active all" width="400px"></img>
+          <Box
+            key="all-active-button"
+            sx={{ position: "absolute", top: "-231px", left: "-200px", zIndex: "0" }}
+          >
+            <img
+              src={`../img/all-over-highlight.png`}
+              alt="all-active-button-pic"
+              width="400px"
+            ></img>
           </Box>
 
-          {validRegion.map((region) => (
+          {region.map((region, index) => (
             <Box sx={{ position: "absolute", top: "-235px", left: "-200px", zIndex: "0" }}>
-              <img src={`../img/${region}-highlight.png`} alt="test" width="400px" />;
+              <img key={index} src={`../img/${region}-highlight.png`} alt="test" width="400px" />
             </Box>
           ))}
         </Box>
@@ -138,10 +165,10 @@ const Diagram = ({ width, height, margin = defaultMargin }) => {
     </Box>
   );
 };
-export default function Voronoi() {
+export default function Voronoi({ sourceName }) {
   return (
     <div>
-      <Diagram width={500} height={370} />
+      <Diagram name={sourceName} width={500} height={370} />
     </div>
   );
 }
