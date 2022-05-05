@@ -1,7 +1,30 @@
-import Picture from "./img/default-abs.png";
+import absPicture from "./img/default-abs.png";
+import fingerPicture from "./img/default-finger.png";
 const styles = {
+  background: {
+    backgroundColor: "#007ff696",
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    fontSize: 16,
+    color: "#fff",
+    userSelect: "none",
+  },
   absBackground: {
-    backgroundImage: `url(${Picture})`,
+    backgroundImage: `url(${absPicture})`,
+    backgroundSize: "contain",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    width: "30rem",
+    height: "30rem",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  fingerBackground: {
+    backgroundImage: `url(${fingerPicture})`,
     backgroundSize: "contain",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
