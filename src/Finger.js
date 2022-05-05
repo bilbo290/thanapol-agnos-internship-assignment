@@ -1,5 +1,4 @@
-import "./App.css";
-import Diagram from "./Voronoi";
+import Voronoi from "./Voronoi";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
@@ -31,7 +30,7 @@ const FingerDiagram = () => {
           <Box style={styles.fingerBackground}>
             <Box sx={{ maxWidth: "90em", maxHeight: "80em", position: "relative" }}>
               <Box>
-                <Diagram />
+                <Voronoi sourceName={"finger"} />
               </Box>
             </Box>
           </Box>

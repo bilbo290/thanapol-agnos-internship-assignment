@@ -17,8 +17,6 @@
     "@visx/voronoi": "^2.1.2",
     "@vx/voronoi": "^0.0.199",
     "d3-delaunay": "^6.0.2",
-    "json-loader": "^0.5.7",
-    "nanoid": "^3.3.4",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",

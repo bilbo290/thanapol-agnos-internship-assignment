@@ -1,4 +1,3 @@
-import "./App.css";
 import Diagram from "./Voronoi";
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -10,6 +9,7 @@ import styles from "./styles.js";
 import { useNavigate } from "react-router-dom";
 const AbsDiagram = () => {
   const navigate = useNavigate();
+  const name = "abs";
   return (
     <Box style={styles.background}>
       <Stack
@@ -26,12 +26,12 @@ const AbsDiagram = () => {
       >
         <Paper elevation={5} sx={{ borderRadius: 5 }}>
           <Box sx={{ marginTop: "2rem" }}>
-            <Typography variant="h4">จุดไหนที่คุณปวดท้องที่สุด ?</Typography>
+            <Typography variant="h4">จุดไหนที่คุณปวดท้องที่สุด?</Typography>
           </Box>
           <Box style={styles.absBackground}>
             <Box sx={{ maxWidth: "90em", maxHeight: "80em", position: "relative" }}>
               <Box>
-                <Diagram />
+                <Diagram sourceName={name} />
               </Box>
             </Box>
           </Box>

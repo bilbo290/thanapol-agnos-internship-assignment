@@ -114,20 +114,10 @@ const Diagram = ({ name, width, height, margin = defaultMargin }) => {
                     : "transparent"
                 }
                 stroke="#000"
-                strokeWidth={0}
+                strokeWidth={0} //change this to 1 to see the voronoi region
                 fillOpacity={hoveredId && neighborIds.has(polygon.data.id) ? 0 : 1}
               />
             ))}
-            {/* {points.map(({ x, y, id }) => (
-              <circle
-                key={`circle-${id}`}
-                r={5}
-                cx={x * innerWidth}
-                cy={y * innerHeight}
-                fill={id === hoveredId ? "fuchsia" : "#000"}
-                fillOpacity={0}
-              />
-            ))} */}
           </Group>
         </svg>
       </Box>
@@ -175,8 +165,7 @@ const Diagram = ({ name, width, height, margin = defaultMargin }) => {
     </Box>
   );
 };
-export default function Voronoi() {
-  const sourceName = "abs";
+export default function Voronoi({ sourceName }) {
   return (
     <div>
       <Diagram name={sourceName} width={500} height={370} />
